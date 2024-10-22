@@ -1,0 +1,24 @@
+post_addresses:
+  css: '.address'
+  multiple: false
+  type: Text
+
+post_phone:
+  css: 'span.phone-hidden'
+  multiple: true
+  type: Attribute
+  attribute: data-phone
+
+post_images_section:
+  css: '.content-area'
+  multiple: false
+  children:
+    post_images:
+      css: 'img'
+      multiple: true
+      type: HTML
+
+post_sections:
+  css: 'div.sc-6orc5o-18.gdAVnx'
+  multiple: false
+  type: Text

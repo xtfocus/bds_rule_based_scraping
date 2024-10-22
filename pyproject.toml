@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "LoveSoup"
+version = "0.1.0"
+description = "Crawl module for real estate ads sites"
+authors = [
+    { name = "Your Name", email = "your.email@example.com" }
+]
+license = { text = "MIT" }
+dependencies = []
+
+[tool.setuptools]
+packages = ["lovesoup"]
+
+[tool.setuptools.package-data]
+"lovesoup" = ["templates/*.yaml"]  # Include YAML files

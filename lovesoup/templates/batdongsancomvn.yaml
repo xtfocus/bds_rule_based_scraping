@@ -1,0 +1,78 @@
+post_title:
+    css: 'h1.js__pr-title'
+    multiple: false
+    type: Text
+
+address:
+    css: 'span.js__pr-address'
+    multiple: false
+    type: Text
+    
+    
+short_info:
+    css: 'div.re__pr-short-info'
+    type: Text
+    children:
+        item:
+            css: 'div.re__pr-short-info-item'
+            multiple: true
+            children:
+                title:
+                    css: 'span.title'
+                    multiple: false
+                    type: Text
+                value:
+                    css: 'span.value'
+                    multiple: false
+                    type: Text       
+                sub:
+                    css: 'span.ext'
+                    type: Text
+
+ad_info:
+    css: '.re__pr-config'
+    type: Text
+    children:
+        item:
+            css: 'div.re__pr-short-info-item'
+            multiple: true
+            children:
+                title:
+                    css: 'span.title'
+                    multiple: false
+                    type: Text
+                value:
+                    css: 'span.value'
+                    multiple: false
+                    type: Text       
+
+description:
+    css: 'div.js__pr-description'
+    multiple: false
+    type: Text
+    
+    
+features:
+    css: 'div.re__pr-specs-content-item'
+    multiple: true
+    children:
+        title:
+            css: 'span.re__pr-specs-content-item-title'
+            multiple: false
+            type: Text
+        value:
+            css: 'span.re__pr-specs-content-item-value'
+            multiple: false
+            type: Text
+    
+phone:
+  css: 'div.btn-phone--lazy-loading span'
+  xpath: null
+  multiple: false
+  type: Text
+
+images:
+  css: 'div.re__media-thumbs img'
+  multiple: true
+  type: Attribute
+  attribute: data-src

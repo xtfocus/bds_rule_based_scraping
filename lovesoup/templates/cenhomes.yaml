@@ -1,0 +1,60 @@
+address:
+    css: '.address'
+    multiple: false
+    type: Text
+      
+title:
+    css: '.page-title'
+    multiple: false
+    type: Text
+
+       
+short_info:
+    css: '.basic-info-right'
+    multiple: false
+    children:
+        listing_price:
+            css: '.total-price'
+            multiple: false
+            type: Text
+        unit_price:
+            css: 'p.unit-price span'
+            multiple: true
+            type: Text
+              
+
+description:
+    css: '.description'
+    multiple: true
+    type: Text
+
+phone:
+    css: '.btn-phone'
+    multiple: false
+    type: Attribute
+    attribute: data-phone
+    
+
+images_section:
+    css: 'div.slidetop'
+    multiple: false
+    children:
+        images:
+            css: img
+            type: Attribute
+            attribute: data-src
+            multiple: true
+            
+
+features:
+    css: 'p.mb-20'
+    multiple: true
+    children:
+        title:
+            css: 'label'
+            multiple: false
+            type: Text
+        value:
+            css: 'span'
+            multiple: false
+            type: Text

@@ -1,0 +1,43 @@
+title:
+    css: 'div.main-info h1'
+    multiple: false
+    type: Text
+    
+address:
+    css: 'div.main-info div.address'
+    multiple: false
+    type: Text
+    
+listing_price:
+    css: 'div.main-info div.price'
+    multiple: false
+    type: Text
+    
+features:
+    css: 'div.main-info div.info-attr'
+    multiple: true
+    children:
+        title:
+            css: 'span'
+            multiple: false
+            type: Text
+        value:
+            css: 'span:nth-of-type(2)'
+            multiple: false
+            type: Text
+            
+description:
+    css: 'div.main-info div.info-content-body'
+    multiple: false
+    type: Text
+
+phone:
+  css: 'div.agent-contact span[ng-bind]'
+  xpath: null
+  multiple: false
+  type: Text
+
+images:
+  css: 'div.media-item img'
+  multiple: true
+  type: HTML  

@@ -1,0 +1,55 @@
+address:
+    css: '.post-address'
+    multiple: false
+    type: Text
+
+phone_number:
+    css: 'button.btn-phone'
+    xpath: null
+    multiple: false
+    type: Text
+
+images_section:
+  css: 'div.post-images'
+  multiple: false
+  children:
+      images:
+          css: 'img'
+          multiple: true
+          type: Attribute
+          attribute: data-src
+      
+description:
+    css: '.post-section'
+    multiple: true
+    type: Text
+
+title:
+    css: 'h1.page-h1'
+    multiple: false
+    type: Text
+    
+short_info:
+    css: 'div.post-features span'
+    multiple: true
+    children:
+        title:
+            css: 'span'
+            type: Attribute
+            attribute: class
+            multiple: false
+        value:
+            css: 'span'
+            type: Text
+            multiple: false
+        
+
+features:
+    css: 'div.table-wrap tr'
+    multiple: true
+    type: Text
+    children:
+        item:
+            css: td
+            type: Text
+            multiple: true
