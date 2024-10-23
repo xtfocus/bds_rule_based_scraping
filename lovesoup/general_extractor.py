@@ -4,10 +4,12 @@ Desc: General extractor function based on template
 """
 
 import importlib.resources as pkg_resources
+import re
 from abc import ABC, abstractmethod
-from typing import Dict
+from typing import Dict, Optional
 
 from loguru import logger
+from pydantic import BaseModel, HttpUrl, validator
 from selectorlib import Extractor
 
 from . import templates  # Assuming templates is in the same package
@@ -46,3 +48,19 @@ class DataExtractor(ABC):
     def run(self, source_path: str) -> Dict:
         primary_result = self.execute_template(source_path)
         return self.post_process(primary_result)
+
+    # def run_html(self, html_content: str):
+    #     pri
+
+
+class ImageURL(BaseModel):
+    raw_string: str
+    url: Optional[HttpUrl] = None
+
+    @validator("url", always=True, pre=True)
+    def extract_url(cls, v, values):
+        # Pattern to match src or data-src
+        match = re.search(r'(?:src|data-src)="(https?://[^"]+)"', values["raw_string"])
+        if match:
+            return match.group(1)
+        raise ValueError("No valid URL found in the string")

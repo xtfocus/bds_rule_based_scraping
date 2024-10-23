@@ -1,39 +1,22 @@
-post_title:
+title:
     css: 'h1'
     type: Text
-    
-post_summary:
-    css: '.c189eou8'
-    type: HTML
+
+pricing:
+    css: 'div.slhwvq6'
     multiple: false
     children:
-        item:
-            css: '.bwq0cbs'
-            multiple: true
+        unit_price:
+            css: '.pyhk1dv'
+            multiple: false
             type: Text
-            
-post_spec:
-    css: '.media-middle'
-    multiple: true
-    type: Text
-    
-post_section:
-    css: '.styles_adBody__vGW74'
-    multiple: false
-    type: Text
-    
-post_images_section:
-    css: '.p17hb054'
-    multiple: false
-    children:
-        post_image:
-            css: 'img'
-            multiple: true
-            type: Attribute
-            attribute: src
-            
-            
-post_phone:
+        listing_price:
+            css: '.bwq0cbs'
+            multiple: false
+            type: Text
+           
+ad_details:
     css: 'script[type="application/json"]'
     type: Text
     multiple: false
+
