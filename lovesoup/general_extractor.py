@@ -6,7 +6,7 @@ Desc: General extractor function based on template
 import importlib.resources as pkg_resources
 import re
 from abc import ABC, abstractmethod
-from typing import Dict, Optional
+from typing import Any, Dict, Optional
 
 from loguru import logger
 from pydantic import BaseModel, HttpUrl, validator
@@ -45,12 +45,13 @@ class DataExtractor(ABC):
     def post_process(self, primary_result: Dict) -> Dict:
         raise NotImplementedError
 
-    def run(self, source_path: str) -> Dict:
+    def run(self, source_path: str) -> Any:
         primary_result = self.execute_template(source_path)
         return self.post_process(primary_result)
 
-    # def run_html(self, html_content: str):
-    #     pri
+    def run_html(self, html_content: str) -> Any:
+        primary_result = self.extractor.extract(html_content)
+        return self.post_process(primary_result)
 
 
 class ImageURL(BaseModel):
