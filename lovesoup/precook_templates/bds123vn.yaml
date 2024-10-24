@@ -1,5 +1,5 @@
 address:
-    css: '.post-address'
+    css: '.post-address span'
     multiple: false
     type: Text
 

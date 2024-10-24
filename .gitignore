@@ -1,49 +1,41 @@
+
 # Python cache files (recursively)
 **/__pycache__/**
-**/egg-info/**
+**/*.pyc
+**/*.pyo
+**/*.pyd
+
+# Egg and build info directories (recursively)
+**/*.egg
+**/*.egg-info/
+**/*.eggs/
+**/build/
+**/dist/
 
 # Environment files (recursively)
 **/.env
 **/.env.*
 **/.azure*
-# Jupyter Notebook (recursively)
-**/.ipynb_checkpoints
-**/notebooks/**
-**/.ipynb
 
-# pytest
+# Jupyter Notebook (recursively)
+**/.ipynb_checkpoints/
+**/notebooks/**
+**/*.ipynb
+
+# pytest cache (recursively)
 **/.pytest_cache/
 
-# Logs
-**/*.log
-
-# Ignore Python bytecode files
-**/*.pyc
-**/*.pyo
-**/*.pyd
-
-# Ignore __pycache__ directories recursively
-**/__pycache__/
-
-# Ignore .egg and .egg-info directories recursively
-**/*.egg
-**/*.egg-info/
-**/*.eggs/
-
-# Ignore virtual environment directories
-**/.env/
-**/.venv/
-
-# Ignore compiled C extensions
-**/*.so
-
-# Ignore distribution and package build directories
-**/build/
-**/dist/
-
-# Ignore log and temporary files
+# Logs (recursively)
 **/*.log
 **/*.tmp
 
-# Ignore cache directories recursively
+# Compiled C extensions
+**/*.so
+
+# Ignore virtual environments (recursively)
+**/.env/
+**/.venv/
+
+# Cache directories (recursively)
 **/.cache/
+

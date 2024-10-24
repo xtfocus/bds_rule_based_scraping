@@ -12,9 +12,9 @@ location.secondary_alley                    (2.3) Hẻm phụ
 land_type                                   (3) Loại đất
 area.area                                   (4) Diện tích
 area.frontage                               (4.1) Mặt tiền/bề ngang (m)
-                                            (5) Công trình xây dựng
+construction                                (5) Công trình xây dựng
 listing_price                               (6) Giá rao bán
 unit_price                                  (6.1) Đơn giá
 images                                      (8) Ảnh
--                                            (9) Ngày đăng tin
+publish_date                                (9) Ngày đăng tin
 

@@ -5,7 +5,9 @@ Desc: Specific post-processor depends on the site/template
 
 import json
 
-from lovesoup.general_extractor import DataExtractor, ImageURL
+from cssselect.parser import parse_simple_selector
+
+from lovesoup.general_extractor import DataExtractor, extract_image_url
 from lovesoup.precook_models.batdongsan_models import BatDongSanPropertyInfo
 from lovesoup.precook_models.bds123vn_models import BDS123VnPropertyInfo
 from lovesoup.precook_models.cenhomes_models import CenhomesPropertyInfo
@@ -14,6 +16,36 @@ from lovesoup.precook_models.muabannet_models import MuabannetPropertyInfo
 from lovesoup.precook_models.nhatot_models import NhatotPropertyInfo
 from lovesoup.property_models import (Address, Location, Measurement,
                                       PropertyNormalized)
+
+
+def extract_second_based_on_first(features, first_cond, default=""):
+    """
+    Extracts the second value from a list of feature objects like [[key1, val1], [key2, val2]]
+    Returns:
+        The extracted value or the default value.
+    """
+    return next(
+        (f[1] for f in features if first_cond(f[0])),
+        default,
+    )
+
+
+def extract_value_based_on_title(features, title, default=""):
+    """
+    Extracts the value for a specific title from a list of feature objects.
+
+    Args:
+        features (list): The list of feature objects containing title-value pairs.
+        title (str): The title of the feature to extract the value for.
+        default (Any): The default value to return if the title is not found.
+
+    Returns:
+        The extracted value or the default value.
+    """
+    return next(
+        (f.value for f in features if f.title == title),
+        default,
+    )
 
 
 class Mogi(DataExtractor):
@@ -30,19 +62,12 @@ class Mogi(DataExtractor):
 
         # Extract area and frontage from features
         area = Measurement(
-            area=next(
-                (
-                    f.value
-                    for f in primary_result.features
-                    if f.title == "Diện tích đất"
-                ),
-                "",
-            ),
+            area=extract_value_based_on_title(primary_result.features, "Diện tích đất"),
             frontage="",  # Assuming frontage is not available in this dataset
         )
         listing_price = primary_result.listing_price
         unit_price = None
-        images = [str(ImageURL(raw_string=i).url) for i in primary_result.images]
+        images = [extract_image_url(i) for i in primary_result.images]
         # Create and return PropertyNormalized object
         return PropertyNormalized(
             address=address,
@@ -70,18 +95,14 @@ class BatDongSan(DataExtractor):
 
         # Extract area and frontage from features
         area = Measurement(
-            area=next(
-                (f.value for f in primary_result.features if f.title == "Diện tích"), ""
-            ),
+            area=extract_value_based_on_title(primary_result.features, "Diện tích"),
             frontage="",  # Assuming frontage is not available in this dataset
         )
 
         # Extract other necessary fields
-        listing_price = next(
-            (f.value for f in primary_result.features if f.title == "Mức giá"), ""
-        )
-        unit_price = next(
-            (f.sub for f in primary_result.short_info.item if f.title == "Mức giá"), ""
+        listing_price = extract_value_based_on_title(primary_result.features, "Mức giá")
+        unit_price = extract_value_based_on_title(
+            primary_result.short_info.item, "Mức giá"
         )
 
         # Create and return PropertyNormalized object
@@ -111,10 +132,7 @@ class Cenhomes(DataExtractor):
 
         # Extract area and frontage from features
         area = Measurement(
-            area=next(
-                (f.value for f in primary_result.features if f.title == "Diện tích:"),
-                "",
-            ),
+            area=extract_value_based_on_title(primary_result.features, "Diện tích:"),
             frontage="",  # Assuming frontage is not available in this dataset
         )
 
@@ -149,26 +167,25 @@ class BDS123Vn(DataExtractor):
 
         # Extract area and frontage from features
         area = Measurement(
-            area=next(
-                (
-                    f.value
-                    for f in primary_result.short_info
-                    if f.title == "item post-acreage"
-                ),
-                "",
+            area=extract_value_based_on_title(
+                primary_result.short_info, "item post-acreage"
             ),
             frontage="",  # Assuming frontage is not available in this dataset
         )
 
-        listing_price = next(
+        listing_price = extract_value_based_on_title(
+            primary_result.short_info, "item post-price"
+        )
+        unit_price = None
+
+        publish_date = next(
             (
-                f.value
-                for f in primary_result.short_info
-                if f.title == "item post-price"
+                f.item[1]
+                for f in primary_result.features
+                if f.item[0] == "Ngày bắt đầu:"
             ),
             "",
         )
-        unit_price = None
 
         # Create and return PropertyNormalized object
         return PropertyNormalized(
@@ -179,6 +196,7 @@ class BDS123Vn(DataExtractor):
             listing_price=listing_price,
             unit_price=unit_price,
             images=primary_result.images_section.images,
+            publish_date=publish_date,
         )
 
 
@@ -210,7 +228,7 @@ class Muabannet(DataExtractor):
 
         listing_price = primary_result.listing_price
         unit_price = None
-        images = [str(ImageURL(raw_string=i).url) for i in primary_result.images]
+        images = [extract_image_url(i) for i in primary_result.images]
 
         # Create and return PropertyNormalized object
         return PropertyNormalized(

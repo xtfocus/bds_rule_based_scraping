@@ -10,10 +10,10 @@ authors = [
     { name = "Your Name", email = "your.email@example.com" }
 ]
 license = { text = "MIT" }
-dependencies = []
+dependencies = ["loguru==0.7.2", "selectorlib==0.16.0"]
 
 [tool.setuptools]
 packages = ["lovesoup"]
 
 [tool.setuptools.package-data]
-"lovesoup" = ["templates/*.yaml"]  # Include YAML files
+"lovesoup" = ["precook_templates/*.yaml"]  # Include YAML files

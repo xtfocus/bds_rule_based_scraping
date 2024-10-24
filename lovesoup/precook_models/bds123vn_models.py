@@ -2,25 +2,27 @@ from typing import List, Optional
 
 from pydantic import BaseModel
 
+from lovesoup.general_extractor import VinaStr
+
 
 class BDS123VnImageSection(BaseModel):
-    images: Optional[List[str]] = None
+    images: Optional[List[str]] = []
 
 
 class BDS123VnShortInfo(BaseModel):
-    title: str
-    value: str
+    title: Optional[str] = None
+    value: Optional[str] = None
 
 
 class BDS123VnFeatureItem(BaseModel):
-    item: List[str]
+    item: Optional[List[VinaStr]] = []
 
 
 class BDS123VnPropertyInfo(BaseModel):
-    address: str
-    phone_number: str
-    images_section: BDS123VnImageSection
-    description: List[str]
-    title: str
-    short_info: List[BDS123VnShortInfo]
-    features: List[BDS123VnFeatureItem]
+    address: Optional[str] = None
+    phone_number: Optional[str] = None
+    images_section: Optional[BDS123VnImageSection] = BDS123VnImageSection()
+    description: Optional[List[str]] = []
+    title: Optional[str] = None
+    short_info: Optional[List[BDS123VnShortInfo]] = []
+    features: Optional[List[BDS123VnFeatureItem]] = []

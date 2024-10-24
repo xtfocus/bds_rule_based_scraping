@@ -38,3 +38,5 @@ class PropertyNormalized(BaseModel):
     listing_price: Optional[str] = None
     unit_price: Optional[str] = None
     images: Optional[List[str]] = None
+    publish_date: Optional[str] = None
+    construction: Optional[str] = None

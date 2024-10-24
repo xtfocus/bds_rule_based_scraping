@@ -5,11 +5,13 @@ Desc: General extractor function based on template
 
 import importlib.resources as pkg_resources
 import re
+import unicodedata
 from abc import ABC, abstractmethod
-from typing import Dict, Optional
+from typing import Annotated, Dict, Optional
 
 from loguru import logger
 from pydantic import BaseModel, HttpUrl, validator
+from pydantic.functional_validators import AfterValidator
 from selectorlib import Extractor
 
 from lovesoup import precook_templates
@@ -37,11 +39,12 @@ class DataExtractor(ABC):
             read_yaml_file(f"{template_name}.yaml")
         )
 
-    def exec_precook(self, source_path: str):
+    def exec_precook(self, source_path: str) -> Dict:
         try:
             # Read the HTML content from the provided source path
             with open(source_path, "r", encoding="utf-8") as file:
                 html_content = file.read()
+
         except Exception as e:
             logger.error(f"Error reading file: {e}")
             raise
@@ -63,14 +66,16 @@ class DataExtractor(ABC):
         return self.post_process(primary_result)
 
 
-class ImageURL(BaseModel):
-    raw_string: str
-    url: Optional[HttpUrl] = None
+def extract_image_url(text: str) -> str:
+    # Pattern to match src or data-src
+    match = re.search(r'(?:src|data-src)="(https?://[^"]+)"', text)
+    if match:
+        return match.group(1)
+    return ""
 
-    @validator("url", always=True, pre=True)
-    def extract_url(cls, v, values):
-        # Pattern to match src or data-src
-        match = re.search(r'(?:src|data-src)="(https?://[^"]+)"', values["raw_string"])
-        if match:
-            return match.group(1)
-        raise ValueError("No valid URL found in the string")
+
+# Create a type alias for VinaStr with constraints using Annotated
+VinaStr = Annotated[
+    str,
+    AfterValidator((lambda x: unicodedata.normalize("NFC", x).replace("\xa0", " "))),
+]
