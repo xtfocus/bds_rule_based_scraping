@@ -17,6 +17,33 @@
 # Logs
 **/*.log
 
+# Ignore Python bytecode files
+**/*.pyc
+**/*.pyo
+**/*.pyd
 
+# Ignore __pycache__ directories recursively
+**/__pycache__/
 
-**/__pycache__/*
+# Ignore .egg and .egg-info directories recursively
+**/*.egg
+**/*.egg-info/
+**/*.eggs/
+
+# Ignore virtual environment directories
+**/.env/
+**/.venv/
+
+# Ignore compiled C extensions
+**/*.so
+
+# Ignore distribution and package build directories
+**/build/
+**/dist/
+
+# Ignore log and temporary files
+**/*.log
+**/*.tmp
+
+# Ignore cache directories recursively
+**/.cache/
