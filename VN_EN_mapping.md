@@ -16,4 +16,5 @@ area.frontage                               (4.1) Mặt tiền/bề ngang (m)
 listing_price                               (6) Giá rao bán
 unit_price                                  (6.1) Đơn giá
 images                                      (8) Ảnh
-                                            (9) Ngày đăng tin
+-                                            (9) Ngày đăng tin
+

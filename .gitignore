@@ -1,5 +1,6 @@
 # Python cache files (recursively)
 **/__pycache__/**
+**/egg-info/**
 
 # Environment files (recursively)
 **/.env
