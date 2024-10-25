@@ -5,6 +5,8 @@ Desc: Specific post-processor depends on the site/template
 
 import json
 
+from loguru import logger
+
 from lovesoup.general_extractor import DataExtractor
 from lovesoup.precook_models.batdongsan_models import BatDongSanPropertyInfo
 from lovesoup.precook_models.bds123vn_models import BDS123VnPropertyInfo
@@ -184,7 +186,6 @@ class BDS123Vn(DataExtractor):
             ),
             "",
         )
-
         # Create and return PropertyNormalized object
         return PropertyNormalized(
             address=address,
@@ -193,7 +194,7 @@ class BDS123Vn(DataExtractor):
             land_type="",  # Assuming land_type is not available in this dataset
             listing_price=listing_price,
             unit_price=unit_price,
-            images=primary_result.images_section.images,
+            images=primary_result.images,
             publish_date=publish_date,
         )
 

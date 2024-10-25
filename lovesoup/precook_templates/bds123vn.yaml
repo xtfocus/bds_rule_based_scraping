@@ -9,16 +9,7 @@ phone_number:
     multiple: false
     type: Text
 
-images_section:
-  css: 'div.post-images'
-  multiple: false
-  children:
-      images:
-          css: 'img'
-          multiple: true
-          type: Attribute
-          attribute: data-src
-      
+     
 description:
     css: '.post-section'
     multiple: true
@@ -53,3 +44,9 @@ features:
             css: td
             type: Text
             multiple: true
+
+images:
+  css: 'div.images-listing div.image-item img'
+  multiple: true
+  type: Attribute
+  attribute: data-src

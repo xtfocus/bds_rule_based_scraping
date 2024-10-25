@@ -3,8 +3,6 @@ File: nhatot_models.py
 Desc: Pydantic models for initial extracted output from nhatot.com
 """
 
-from typing import List
-
 from pydantic import BaseModel
 
 

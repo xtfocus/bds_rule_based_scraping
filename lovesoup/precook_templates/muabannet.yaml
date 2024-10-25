@@ -10,9 +10,11 @@ phone:
   attribute: data-phone
 
 images:
-  css: '.content-area img'
+  css: '.content-area .slick-slide img'
   multiple: true
-  type: HTML
+  type: HTML  
+  format: ImageURLFormatter
+  
      
 short_info:
     css: 'ul.sc-6orc5o-24 li'
@@ -32,8 +34,6 @@ description:
   css: 'div.sc-6orc5o-18.gdAVnx'
   multiple: false
   type: Text
-  
-
 
 features:
     css: 'div.group-parameters li'

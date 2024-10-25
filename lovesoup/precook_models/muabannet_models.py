@@ -4,10 +4,10 @@ from pydantic import BaseModel
 
 
 class MuabannetPropertyInfo(BaseModel):
-    address: str
-    phone: List[str]
-    images: List[str]
-    short_info: List[Dict[str, List]]
-    listing_price: str
-    description: str
-    features: List[str]
+    address: Optional[str]
+    phone: Optional[List[str]]
+    images: Optional[List[str]]
+    short_info: Optional[List[Dict[str, List]]]
+    listing_price: Optional[str]
+    description: Optional[str]
+    features: Optional[List[str]]

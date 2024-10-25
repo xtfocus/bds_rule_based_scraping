@@ -42,3 +42,4 @@ images:
   multiple: true
   type: HTML  
   format: ImageURLFormatter
+  
