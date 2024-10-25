@@ -10,41 +10,35 @@ address:
     
     
 short_info:
-    css: 'div.re__pr-short-info'
+    css: 'div.re__pr-short-info div.re__pr-short-info-item'
     type: Text
+    multiple: true
     children:
-        item:
-            css: 'div.re__pr-short-info-item'
-            multiple: true
-            children:
-                title:
-                    css: 'span.title'
-                    multiple: false
-                    type: Text
-                value:
-                    css: 'span.value'
-                    multiple: false
-                    type: Text       
-                sub:
-                    css: 'span.ext'
-                    type: Text
+        title:
+            css: 'span.title'
+            multiple: false
+            type: Text
+        value:
+            css: 'span.value'
+            multiple: false
+            type: Text       
+        sub:
+            css: 'span.ext'
+            type: Text
 
 ad_info:
-    css: '.re__pr-config'
+    css: '.re__pr-config div.re__pr-short-info-item'
     type: Text
+    multiple: true
     children:
-        item:
-            css: 'div.re__pr-short-info-item'
-            multiple: true
-            children:
-                title:
-                    css: 'span.title'
-                    multiple: false
-                    type: Text
-                value:
-                    css: 'span.value'
-                    multiple: false
-                    type: Text       
+        title:
+            css: 'span.title'
+            multiple: false
+            type: Text
+        value:
+            css: 'span.value'
+            multiple: false
+            type: Text       
 
 description:
     css: 'div.js__pr-description'

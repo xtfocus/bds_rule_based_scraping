@@ -14,17 +14,9 @@ class BatDongSanShortInfoItem(BaseModel):
     sub: Optional[str] = None
 
 
-class BatDongSanShortInfo(BaseModel):
-    item: List[BatDongSanShortInfoItem]
-
-
 class BatDongSanAdInfoItem(BaseModel):
     title: str
     value: str
-
-
-class BatDongSanAdInfo(BaseModel):
-    item: List[BatDongSanAdInfoItem]
 
 
 class BatDongSanFeature(BaseModel):
@@ -35,8 +27,8 @@ class BatDongSanFeature(BaseModel):
 class BatDongSanPropertyInfo(BaseModel):
     post_title: str
     address: str
-    short_info: BatDongSanShortInfo
-    ad_info: BatDongSanAdInfo
+    short_info: List[BatDongSanShortInfoItem]
+    ad_info: List[BatDongSanAdInfoItem]
     description: str
     features: List[BatDongSanFeature]
     phone: str

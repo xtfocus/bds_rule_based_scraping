@@ -24,10 +24,12 @@ def extract_second_based_on_first(features, first_cond, default=""):
     Returns:
         The extracted value or the default value.
     """
-    return next(
-        (f[1] for f in features if first_cond(f[0])),
-        default,
-    )
+    if features:
+        return next(
+            (f[1] for f in features if first_cond(f[0])),
+            default,
+        )
+    return default
 
 
 def extract_value_based_on_title(features, title, default=""):
@@ -42,10 +44,12 @@ def extract_value_based_on_title(features, title, default=""):
     Returns:
         The extracted value or the default value.
     """
-    return next(
-        (f.value for f in features if f.title == title),
-        default,
-    )
+    if features:
+        return next(
+            (f.value for f in features if f.title == title),
+            default,
+        )
+    return default
 
 
 class Mogi(DataExtractor):
@@ -68,6 +72,9 @@ class Mogi(DataExtractor):
         listing_price = primary_result.listing_price
         unit_price = None
         images = primary_result.images
+        publish_date = extract_value_based_on_title(
+            primary_result.features, "Ngày đăng"
+        )
         # Create and return PropertyNormalized object
         return PropertyNormalized(
             address=address,
@@ -77,6 +84,7 @@ class Mogi(DataExtractor):
             listing_price=listing_price,
             unit_price=unit_price,
             images=images,
+            publish_date=publish_date,
         )
 
 
@@ -101,9 +109,8 @@ class BatDongSan(DataExtractor):
 
         # Extract other necessary fields
         listing_price = extract_value_based_on_title(primary_result.features, "Mức giá")
-        unit_price = extract_value_based_on_title(
-            primary_result.short_info.item, "Mức giá"
-        )
+        unit_price = next((f.sub for f in primary_result.short_info), "")
+        publish_date = extract_value_based_on_title(primary_result.ad_info, "Ngày đăng")
 
         # Create and return PropertyNormalized object
         return PropertyNormalized(
@@ -114,6 +121,7 @@ class BatDongSan(DataExtractor):
             listing_price=listing_price,
             unit_price=unit_price,
             images=primary_result.images,
+            publish_date=publish_date,
         )
 
 
@@ -124,7 +132,16 @@ class Cenhomes(DataExtractor):
     def post_process(self, primary_result):
         primary_result = CenhomesPropertyInfo.model_validate(primary_result)
 
-        address = Address(full_address=primary_result.address)
+        address = Address(
+            full_address=primary_result.address,
+            ward=extract_value_based_on_title(primary_result.geolocation, "Phường/Xã:"),
+            district=extract_value_based_on_title(
+                primary_result.geolocation, "Quận/Huyện:"
+            ),
+            province=extract_value_based_on_title(
+                primary_result.geolocation, "Tỉnh/Thành phố:"
+            ),
+        )
 
         location = Location(
             position="", alley_position="", distance_to_main_road="", secondary_alley=""
@@ -139,16 +156,27 @@ class Cenhomes(DataExtractor):
         # Extract other necessary fields
         listing_price = primary_result.short_info.listing_price
         unit_price = primary_result.short_info.unit_price[0]
+        construction = extract_value_based_on_title(primary_result.features, "Số tầng:")
+        if construction:
+            if area:
+                construction = f"{construction} tầng/{area.area}"
+            else:
+                construction = f"{construction} tầng"
 
+        land_type = extract_value_based_on_title(primary_result.features, "Loại hình:")
+
+        # This site doesn't give publish_date
         # Create and return PropertyNormalized object
         return PropertyNormalized(
             address=address,
             location=location,
             area=area,
-            land_type="",  # Assuming land_type is not available in this dataset
+            land_type=land_type,  # Assuming land_type is not available in this dataset
             listing_price=listing_price,
             unit_price=unit_price,
             images=primary_result.images_section.images,
+            construction=construction,
+            publish_date="",
         )
 
 

@@ -47,7 +47,7 @@ images_section:
             
 
 features:
-    css: 'p.mb-20'
+    css: '.block-feature p'
     multiple: true
     children:
         title:
@@ -58,3 +58,18 @@ features:
             css: 'span'
             multiple: false
             type: Text
+
+geolocation:
+    css: 'div.block-location p'
+    multiple: true
+    children:
+        title:
+            css: 'label'
+            multiple: false
+            type: Text
+        value:
+            css: 'span'
+            multiple: false
+            type: Text
+
+

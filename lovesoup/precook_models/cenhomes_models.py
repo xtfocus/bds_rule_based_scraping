@@ -9,24 +9,25 @@ from pydantic import BaseModel
 
 
 class CenhomesShortInfo(BaseModel):
-    listing_price: str
-    unit_price: List[str]
+    listing_price: Optional[str] = ""
+    unit_price: Optional[List[str]] = []
 
 
 class CenhomesImagesSection(BaseModel):
-    images: List[str]
+    images: Optional[List[str]] = []
 
 
 class CenhomesFeature(BaseModel):
-    title: str
+    title: Optional[str]
     value: Optional[str]
 
 
 class CenhomesPropertyInfo(BaseModel):
-    address: str
-    title: str
-    short_info: CenhomesShortInfo
-    description: List[str]
-    phone: str
-    images_section: CenhomesImagesSection
-    features: List[CenhomesFeature]
+    address: Optional[str]
+    title: Optional[str]
+    short_info: Optional[CenhomesShortInfo] = CenhomesShortInfo()
+    description: Optional[List[str]] = []
+    phone: Optional[str]
+    images_section: Optional[CenhomesImagesSection]
+    features: Optional[List[CenhomesFeature]] = []
+    geolocation: Optional[List[CenhomesFeature]] = []
