@@ -5,9 +5,7 @@ Desc: Specific post-processor depends on the site/template
 
 import json
 
-from cssselect.parser import parse_simple_selector
-
-from lovesoup.general_extractor import DataExtractor, extract_image_url
+from lovesoup.general_extractor import DataExtractor
 from lovesoup.precook_models.batdongsan_models import BatDongSanPropertyInfo
 from lovesoup.precook_models.bds123vn_models import BDS123VnPropertyInfo
 from lovesoup.precook_models.cenhomes_models import CenhomesPropertyInfo
@@ -67,7 +65,7 @@ class Mogi(DataExtractor):
         )
         listing_price = primary_result.listing_price
         unit_price = None
-        images = [extract_image_url(i) for i in primary_result.images]
+        images = primary_result.images
         # Create and return PropertyNormalized object
         return PropertyNormalized(
             address=address,
@@ -228,7 +226,7 @@ class Muabannet(DataExtractor):
 
         listing_price = primary_result.listing_price
         unit_price = None
-        images = [extract_image_url(i) for i in primary_result.images]
+        images = primary_result.images
 
         # Create and return PropertyNormalized object
         return PropertyNormalized(

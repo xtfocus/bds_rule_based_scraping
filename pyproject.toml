@@ -10,7 +10,7 @@ authors = [
     { name = "Your Name", email = "your.email@example.com" }
 ]
 license = { text = "MIT" }
-dependencies = ["loguru==0.7.2", "selectorlib==0.16.0"]
+dependencies = ["loguru==0.7.2", "selectorlib==0.16.0", "pytest==8.3.2"]
 
 [tool.setuptools]
 packages = ["lovesoup"]

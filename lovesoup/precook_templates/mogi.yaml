@@ -41,3 +41,4 @@ images:
   css: 'div.media-item img'
   multiple: true
   type: HTML  
+  format: ImageURLFormatter
