@@ -1,7 +1,8 @@
 # Installation
 
 ```bash
-$ cd lovesoup
+$ git clone https://github.com/xtfocus/bds_rule_based_scraping.git
+$ cd bds_rule_based_scraping
 $ ls
 # Output
 # lovesoup
