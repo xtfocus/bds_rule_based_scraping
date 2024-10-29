@@ -1,3 +1,5 @@
+Mapping to Target Fields
+```
 address.full_address                        (1) Địa chỉ tài sản
 address.house_no                            (1.1) Số nhà
 address.alley                               (1.2) Số ngõ/hẻm
@@ -17,4 +19,4 @@ listing_price                               (6) Giá rao bán
 unit_price                                  (6.1) Đơn giá
 images                                      (8) Ảnh
 publish_date                                (9) Ngày đăng tin
-
+```
