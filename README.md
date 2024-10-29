@@ -21,9 +21,10 @@ from lovesoup.cooks import BatDongSan, Cenhomes, BDS123Vn, Mogi, Muabannet, Nhat
 
 muabannet_extractor = Muabannet()
 
-muabannet_extractor.kun_html(html_str) # html_str is a muaban.net ad site HTML string 
+muabannet_extractor.run_html(html_str) # html_str is a muaban.net ad site HTML string 
 # or
 muabannet_extractor.run(path_to_html)
+
 # Just the images from the ad:
 muabannet_extractor.run_html(html_str).images
 ```
