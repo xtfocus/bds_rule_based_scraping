@@ -1,29 +1,30 @@
-# Install locally
+# Installation
 
 ```bash
-cd lovesoup
-ls
-
+$ cd lovesoup
+$ ls
 # Output
-lovesoup
-pyproject.toml
-README.md
-```
+# lovesoup
+# pyproject.toml
+# README.md
 
-```bash
-pip install -e .
+$ pip install -e .
 # Output
-Audited 1 package in 10ms
+# Audited 1 package in 10ms
 ```
 
 # Usage
+
 ```python
+from lovesoup.cooks import BatDongSan, Cenhomes, BDS123Vn, Mogi, Muabannet, Nhatot
 
-from lovesoup.post_processing import BatDongSan, Cenhomes, BDS123Vn, Mogi, Muabannet, Nhatot
+muabannet_extractor = Muabannet()
 
-extractor = Muabannet()
-
-extractor.run_html(html_str)
-extractor.run(path_to_html)
+muabannet_extractor.kun_html(html_str) # html_str is a muaban.net ad site HTML string 
+# or
+muabannet_extractor.run(path_to_html)
+# Just the images from the ad:
+muabannet_extractor.run_html(html_str).images
 ```
+
 
